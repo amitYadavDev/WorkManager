@@ -21,8 +21,6 @@ class QuoteRepoImpl(private val workManager: WorkManager,
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
 
-
-
         val workRequest = OneTimeWorkRequestBuilder<FetchWorker>()
             .setConstraints(constraints)
             .build()
