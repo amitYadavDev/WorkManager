@@ -25,9 +25,9 @@ class FetchWorker @AssistedInject constructor(
 
     override suspend fun doWork(): Result {
         return try {
+            Log.i(TAG, "Fetching data...")
             val response = apiService.getQuotes().toDomain(ONE_TIME_WORK_REQUEST)
             quoteDao.insert(response)
-            Log.i(TAG, response.toString())
             Result.success()
         }catch (e: Exception) {
             Result.failure()
