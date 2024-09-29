@@ -1,4 +1,4 @@
-package app.exam.workmanagerpractice.data
+package app.exam.workmanagerpractice.data.repository
 
 import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
@@ -8,7 +8,7 @@ import androidx.work.PeriodicWorkRequest
 import androidx.work.WorkManager
 import app.exam.workmanagerpractice.data.local.QuoteDao
 import app.exam.workmanagerpractice.domain.model.Quote
-import app.exam.workmanagerpractice.domain.user_cases.QuoteRepository
+import app.exam.workmanagerpractice.domain.repository.QuoteRepository
 import app.exam.workmanagerpractice.worker.FetchWorker
 import app.exam.workmanagerpractice.worker.PeriodicWorker
 import kotlinx.coroutines.flow.Flow

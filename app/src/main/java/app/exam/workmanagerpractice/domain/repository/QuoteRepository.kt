@@ -1,4 +1,4 @@
-package app.exam.workmanagerpractice.domain.user_cases
+package app.exam.workmanagerpractice.domain.repository
 
 import app.exam.workmanagerpractice.domain.model.Quote
 import kotlinx.coroutines.flow.Flow
