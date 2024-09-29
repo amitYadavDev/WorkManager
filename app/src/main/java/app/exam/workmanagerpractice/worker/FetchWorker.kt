@@ -1,6 +1,7 @@
 package app.exam.workmanagerpractice.worker
 
 import android.content.Context
+import android.util.Log
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
@@ -19,12 +20,14 @@ class FetchWorker @AssistedInject constructor(
     private val apiService: ApiService,
     private val quoteDao: QuoteDao
 ) : CoroutineWorker(context, workerParameters) {
+    private val TAG = "FetchWorker"
 
 
     override suspend fun doWork(): Result {
         return try {
             val response = apiService.getQuotes().toDomain(ONE_TIME_WORK_REQUEST)
             quoteDao.insert(response)
+            Log.i(TAG, response.toString())
             Result.success()
         }catch (e: Exception) {
             Result.failure()

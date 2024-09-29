@@ -1,5 +1,6 @@
 package app.exam.workmanagerpractice.data.repository
 
+import android.util.Log
 import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
@@ -16,11 +17,12 @@ import java.util.concurrent.TimeUnit
 
 class QuoteRepoImpl(private val workManager: WorkManager,
     private val quoteDao: QuoteDao) : QuoteRepository {
+    private val TAG = "QuoteRepoImpl"
     override fun getQuote() {
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
-
+        Log.i(TAG, " getQuote")
         val workRequest = OneTimeWorkRequestBuilder<FetchWorker>()
             .setConstraints(constraints)
             .build()
@@ -28,6 +30,7 @@ class QuoteRepoImpl(private val workManager: WorkManager,
     }
 
     override fun getAllQuotes(): Flow<List<Quote>> {
+        Log.i(TAG, " getAllQuotes")
         return quoteDao.getAllQuotes()
     }
 
@@ -39,6 +42,7 @@ class QuoteRepoImpl(private val workManager: WorkManager,
         val workRequest = PeriodicWorkRequest.Builder(PeriodicWorker::class.java, 15, TimeUnit.MINUTES)
             .setConstraints(constraints)
             .build()
+        Log.i(TAG, " setPeriodicWorkRequest")
 
         workManager.enqueueUniquePeriodicWork("uniqueWorkName",
             ExistingPeriodicWorkPolicy.UPDATE,
