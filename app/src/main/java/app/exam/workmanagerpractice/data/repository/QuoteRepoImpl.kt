@@ -11,6 +11,7 @@ import app.exam.workmanagerpractice.data.local.QuoteDao
 import app.exam.workmanagerpractice.domain.model.Quote
 import app.exam.workmanagerpractice.domain.repository.QuoteRepository
 import app.exam.workmanagerpractice.worker.FetchWorker
+import app.exam.workmanagerpractice.worker.NotificationWorker
 import app.exam.workmanagerpractice.worker.PeriodicWorker
 import kotlinx.coroutines.flow.Flow
 import java.util.concurrent.TimeUnit
@@ -26,7 +27,10 @@ class QuoteRepoImpl(private val workManager: WorkManager,
         val workRequest = OneTimeWorkRequestBuilder<FetchWorker>()
             .setConstraints(constraints)
             .build()
-        workManager.enqueue(workRequest)
+        val notificationWorkRequest = OneTimeWorkRequestBuilder<NotificationWorker>().build()
+        workManager.beginWith(workRequest)
+            .then(notificationWorkRequest)
+            .enqueue()
     }
 
     override fun getAllQuotes(): Flow<List<Quote>> {

@@ -4,10 +4,12 @@ import android.content.Context
 import android.util.Log
 import androidx.hilt.work.HiltWorker
 import androidx.work.CoroutineWorker
+import androidx.work.Data
 import androidx.work.WorkerParameters
 import app.exam.workmanagerpractice.data.local.QuoteDao
 import app.exam.workmanagerpractice.data.mappers.toDomain
 import app.exam.workmanagerpractice.data.remote.ApiService
+import com.google.gson.Gson
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 
@@ -28,7 +30,10 @@ class FetchWorker @AssistedInject constructor(
             Log.i(TAG, "Fetching data...")
             val response = apiService.getQuotes().toDomain(ONE_TIME_WORK_REQUEST)
             quoteDao.insert(response)
-            Result.success()
+            val data = Data.Builder()
+                .putString(QUOTE, Gson().toJson(response))
+                .build()
+            Result.success(data)
         }catch (e: Exception) {
             Result.failure()
         }
