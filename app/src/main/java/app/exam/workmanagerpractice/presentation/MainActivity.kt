@@ -33,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import app.exam.workmanagerpractice.data.common.formatTimestampToDate
 import app.exam.workmanagerpractice.presentation.ui.theme.WorkManagerPracticeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -92,7 +93,7 @@ fun HomeScreen(viewModel: QuoteViewModel, fetchQuote: () -> Unit) {
                                 modifier = Modifier.fillMaxWidth(),
                                 horizontalArrangement = Arrangement.SpaceBetween
                             ) {
-                                Text(text = quote.time.toString())
+                                Text(text = formatTimestampToDate(quote.time))
                                 Text(text = quote.workType)
                             }
                         }
