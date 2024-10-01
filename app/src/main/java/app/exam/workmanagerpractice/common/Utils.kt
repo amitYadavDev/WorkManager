@@ -1,4 +1,4 @@
-package app.exam.workmanagerpractice.data.common
+package app.exam.workmanagerpractice.common
 
 import java.sql.Timestamp
 import java.text.SimpleDateFormat

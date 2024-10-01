@@ -33,7 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import app.exam.workmanagerpractice.data.common.formatTimestampToDate
+import app.exam.workmanagerpractice.common.formatTimestampToDate
 import app.exam.workmanagerpractice.presentation.ui.theme.WorkManagerPracticeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
